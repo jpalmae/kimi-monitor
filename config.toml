@@ -1,0 +1,35 @@
+# kimi-monitor configuration
+
+[kimi]
+# Optional friendly name for this account (shown in the TUI header
+# and in Telegram messages). Useful when you monitor several coding accounts.
+# Leave empty to hide it. Can also be set via KIMI_ACCOUNT_NAME in .env.
+name = ""
+endpoint = "https://api.kimi.com/coding/v1/usages"
+timeout_sec = 20
+
+[monitor]
+# Background polling interval for alerts daemon (seconds)
+poll_interval = 300
+
+[tui]
+# TUI auto-refresh interval (seconds)
+refresh_interval = 60
+# Show the "Monthly Total Quota" panel?
+# Can also be toggled at runtime with the 'm' key.
+show_monthly = true
+
+[alerts]
+# Telegram (leave empty to disable alerts)
+tg_bot_token = ""
+# One or more recipients. Each chat id must have sent /start to the bot first.
+# You can list them as an array:
+tg_chat_ids = []
+# ...or a single value / comma-separated (backward compatible):
+# tg_chat_id = "111222333"
+# tg_chat_id = "111222333,444555666"
+
+thresholds       = [50, 75, 90, 100]  # % at which to alert (on the way up)
+recovered_below  = 20                  # notify "reset/available" when usage drops below
+notify_reset     = true                # send a "quota reset/recovered" notice (on/off)
+min_interval_sec = 60                  # global anti-spam floor between any two alerts
